@@ -1,2 +1,0 @@
-# REST Assured Fundamentals
-
