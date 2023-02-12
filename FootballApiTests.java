@@ -17,14 +17,24 @@ public class FootballApiTests extends FootballApiConfig {
         given()
                 .queryParam("areas", 2255).
         when()
-            .get("areas");
+            .get("/areas");
     }
+    
+    @Test
+    public void getDetailsOfMultipleAreas() {
+        String areaIds = "2076,2077,2080";
+        
+        given()
+            .queryparam("areas"; areaIds)
+            
+        when()
+            .get("/areas");
 
     @Test
     public void getDateFounded() {
         given().
         when()
-                .get("teams/57").
+                .get("/teams/57").
         then()
                 .body("founded", equalTo(1886));
 
@@ -41,7 +51,7 @@ public class FootballApiTests extends FootballApiConfig {
 
     @Test
     public void getAllTeamData() {
-        String responseBody = get("teams/57").asString();
+        String responseBody = get("/teams/57").asString();
         System.out.println(responseBody);
     }
 
@@ -50,7 +60,7 @@ public class FootballApiTests extends FootballApiConfig {
         Response response =
                 given().
                         when()
-                        .get("teams/57").
+                        .get("/teams/57").
                         then()
                         .contentType(ContentType.JSON)
                         .extract().response();
@@ -63,7 +73,7 @@ public class FootballApiTests extends FootballApiConfig {
         Response response =
                 given().
                         when().
-                        get("teams/57").
+                        get("/teams/57").
                         then()
                         .contentType(ContentType.JSON)
                         .extract().response();
