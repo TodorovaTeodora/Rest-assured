@@ -13,15 +13,13 @@ import static org.hamcrest.Matchers.lessThan;
 
 public class VideoGameConfig {
 
-    public static RequestSpecification videoGame_requestSpec;
-    public static ResponseSpecification videoGame_responseSpec;
-
     @BeforeClass
     public static void setup() {
+        
+        RestAssured.setBaseUri("http://localhost")
+        RestAssured.setBasePath("/app/")
 
-        videoGame_requestSpec = new RequestSpecBuilder()
-                .setBaseUri("http://localhost")
-                .setBasePath("/app/")
+        RestAssured.requestSpecification = new RequestSpecBuilder()
                 .setPort(8080)
                 .addHeader("Content-Type", "application/json")
                 .addHeader("Accept", "application/json")
@@ -29,13 +27,11 @@ public class VideoGameConfig {
                 .addFilter(new ResponseLoggingFilter())
                 .build();
 
-        videoGame_responseSpec = new ResponseSpecBuilder()
+        RestAssured.responseSpecification = new ResponseSpecBuilder()
                 .expectStatusCode(200)
                 .expectResponseTime(lessThan(3000L))
                 .build();
 
-        RestAssured.requestSpecification = videoGame_requestSpec;
-        RestAssured.responseSpecification = videoGame_responseSpec;
 
     }
 }
