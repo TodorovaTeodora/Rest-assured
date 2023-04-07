@@ -49,9 +49,9 @@ public class FootballApiTests extends FootballApiConfig {
     public void getAllTeamData_DoCheckFirst() {
         Response response =
                 given().
-                        when()
+                when()
                         .get("teams/57").
-                        then()
+                then()
                         .contentType(ContentType.JSON)
                         .extract().response();
 
@@ -62,23 +62,20 @@ public class FootballApiTests extends FootballApiConfig {
     public void extractHeaders() {
         Response response =
                 given().
-                        when().
+                when().
                         get("teams/57").
-                        then()
+                then()
                         .contentType(ContentType.JSON)
                         .extract().response();
 
         Headers headers = response.getHeaders();
-
         String contentType = response.getHeader("Content-Type");
-
         System.out.println(contentType);
     }
 
     @Test
     public void extractFirstTeamName() {
         String firstTeamName = get("competitions/2021/teams").jsonPath().getString("teams.name[0]");
-
         System.out.println(firstTeamName);
     }
 
@@ -90,7 +87,6 @@ public class FootballApiTests extends FootballApiConfig {
                         then().extract().response();
 
         List<String> teamNames = response.path("teams.name");
-
         for(String teamName : teamNames) {
             System.out.println(teamName);
         }
