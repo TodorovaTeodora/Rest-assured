@@ -14,7 +14,8 @@ public class VideoGameDbTests extends VideoGameConfig {
     @Test
     public void getAllGames() {
         given().
-        when().get(VideoGamesEndpoints.ALL_VIDEO_GAMES).
+        when()
+               .get(VideoGamesEndpoints.ALL_VIDEO_GAMES).
         then();
     }
 
@@ -50,7 +51,7 @@ public class VideoGameDbTests extends VideoGameConfig {
                .header("Accept", "application/xml")
                .header("Content-Type", "application/xml").
         when()
-                .post(VideoGamesEndpoints.ALL_VIDEO_GAMES).
+               .post(VideoGamesEndpoints.ALL_VIDEO_GAMES).
         then();
 
     }
@@ -97,8 +98,8 @@ public class VideoGameDbTests extends VideoGameConfig {
 
         given().
                 body(videoGame).
-        when().
-               post(VideoGamesEndpoints.ALL_VIDEO_GAMES).
+        when()
+               .post(VideoGamesEndpoints.ALL_VIDEO_GAMES).
         then();
     }
 
@@ -108,8 +109,8 @@ public class VideoGameDbTests extends VideoGameConfig {
                 pathParam("videoGameId", 5).
                 header("Content-Type", "application/xml").
                 header("Accept", "application/xml").
-        when().
-                get(VideoGamesEndpoints.SINGLE_VIDEO_GAME).
+        when()
+                .get(VideoGamesEndpoints.SINGLE_VIDEO_GAME).
         then().
                 body(matchesXsdInClasspath("VideoGameXSD.xsd"));
     }
@@ -118,17 +119,16 @@ public class VideoGameDbTests extends VideoGameConfig {
     public void testVideoGameSchemaJSON() {
         given().
                 pathParam("videoGameId", 5).
-        when().
-                get(VideoGamesEndpoints.SINGLE_VIDEO_GAME).
-        then().
-                body(matchesJsonSchemaInClasspath("VideoGameJsonSchema.json"));
+        when()
+                .get(VideoGamesEndpoints.SINGLE_VIDEO_GAME).
+        then()
+                .body(matchesJsonSchemaInClasspath("VideoGameJsonSchema.json"));
     }
 
     @Test
     public void convertJSONToPojo() {
         Response response =  given().pathParam("videoGameId", 5).
-                when().
-                get(VideoGamesEndpoints.SINGLE_VIDEO_GAME);
+              when().get(VideoGamesEndpoints.SINGLE_VIDEO_GAME);
 
         VideoGame videoGame = response.getBody().as(VideoGame.class);
 
@@ -138,18 +138,17 @@ public class VideoGameDbTests extends VideoGameConfig {
     @Test
     public void captureResponseTime() {
         long responseTime = get(VideoGamesEndpoints.ALL_VIDEO_GAMES).time();
+        
         System.out.println("Response time in MS: " + responseTime);
     }
 
     @Test
     public void assertOnResponseTime() {
-        when().
-                get(VideoGamesEndpoints.ALL_VIDEO_GAMES).
-        then().
-                time(lessThan(1000L));
+        when()
+                .get(VideoGamesEndpoints.ALL_VIDEO_GAMES).
+        then()
+                .time(lessThan(1000L));
     }
-
-
 
 
 }
