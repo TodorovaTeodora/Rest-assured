@@ -14,7 +14,7 @@ public class FootballApiConfig {
     @BeforeClass
     public static void setup() {
         RestAssured.setBaseUri("http://api.football-data.org");
-        RestAssured.setBasePath("/v2/");
+        RestAssured.setBasePath("/v4/");
         
         RestAssured.requestSpecification = new RequestSpecBuilder()
                 .addHeader("X-Auth-Token", "fae8b099875d41f395c58dbb7f35556b")
