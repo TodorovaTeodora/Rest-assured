@@ -30,10 +30,10 @@ public class VideoGameDbTests extends VideoGameConfig {
                 "  \"rating\": \"Mature\"\n" +
                 "}";
 
-        given()
-                .body(gameBodyJson).
-        when()
-                .post(VideoGamesEndpoints.ALL_VIDEO_GAMES).
+        given().
+                body(gameBodyJson).
+        when().
+                post(VideoGamesEndpoints.ALL_VIDEO_GAMES).
         then();
     }
 
