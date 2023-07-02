@@ -127,9 +127,11 @@ public class VideoGameDbTests extends VideoGameConfig {
 
     @Test
     public void convertJSONToPojo() {
-        Response response =  given().pathParam("videoGameId", 5).
-        when().
-                get(VideoGamesEndpoints.SINGLE_VIDEO_GAME);
+        Response response =
+        given()
+                .pathParam("videoGameId", 5).
+        when()
+                .get(VideoGamesEndpoints.SINGLE_VIDEO_GAME);
 
         VideoGame videoGame = response.getBody().as(VideoGame.class);
 
