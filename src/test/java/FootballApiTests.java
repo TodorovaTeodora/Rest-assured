@@ -83,8 +83,9 @@ public class FootballApiTests extends FootballApiConfig {
     public void extractAllTeamNames() {
         Response response =
                 given().
-                        when().get("competitions/2021/teams").
-                        then().extract().response();
+                when().
+                        get("competitions/2021/teams").
+                then().extract().response();
 
         List<String> teamNames = response.path("teams.name");
         for(String teamName : teamNames) {
